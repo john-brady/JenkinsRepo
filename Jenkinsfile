@@ -11,6 +11,16 @@ pipeline {
         echo "${TEST_USER_PSW}"
       }
     }
+    stage('Checkpoint') {
+      steps {
+        checkpoint 'Checkpoint'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploying....'
+      }
+    }
     stage('Testing') {
       failFast true
       parallel {
@@ -32,16 +42,6 @@ pipeline {
             sleep(time: 20, unit: 'SECONDS')
           }
         }
-      }
-    }
-    stage('Checkpoint') {
-      steps {
-        checkpoint 'Checkpoint'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying....'
       }
     }
   }
