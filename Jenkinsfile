@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Deploy') {
       options {
-        timeout(time: 30, unit: 'SECONDS') 
+        timeout(time: 15, unit: 'SECONDS') 
       }
       input {
         message "Which Version?"
@@ -33,5 +33,10 @@ pipeline {
   }
   parameters {
     string(name: 'Name', defaultValue: 'whoever you are', description: 'Who should I say hi to?')
+  }
+  post {
+    aborted {
+      echo 'Why didn\'t you push my button?'
+    }
   }
 }
